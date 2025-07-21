@@ -10,13 +10,14 @@ declare(strict_types=1);
  * @license    https://www.apache.org/licenses/LICENSE-2.0 Apache 2.0
  */
 
-namespace  WebExMachina\WebExAIBundle\EventListener;
+namespace  WEM\WebExAIBundle\EventListener;
 
 use Contao\CoreBundle\Event\ContaoCoreEvents;
 use Contao\CoreBundle\Event\MenuEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RequestStack;
-use WebExMachina\WebExAIBundle\Controller\BackendWebExAIController;
+use WEM\WebExAIBundle\Controller\BackendWebExAIToolsController;
+use WEM\WebExAIBundle\Controller\BackendWebExAIParametersController;
 
 #[AsEventListener(ContaoCoreEvents::BACKEND_MENU_BUILD, priority: -255)]
 final readonly class WebExAIBackendMenuListener
@@ -38,12 +39,24 @@ final readonly class WebExAIBackendMenuListener
         $contentNode = $tree->getChild('content');
 
         $node = $factory
-            ->createItem('my-webex-ai', ['route' => BackendWebExAIController::class])
-            ->setLabel('WebEx AI Menu')
-            ->setLinkAttribute('title', 'Title')
+            ->createItem('my-webex-ai-parameters', ['route' => BackendWebExAIParametersController::class])
+            ->setLabel('WebEx AI Tools')
+            ->setLinkAttribute('title', 'Paramètres')
             ->setLinkAttribute('class', 'my-webex-ai')
             ->setCurrent(
-                $this->requestStack->getCurrentRequest()->get('_controller') === BackendWebExAIController::class
+                $this->requestStack->getCurrentRequest()->get('_controller') === BackendWebExAIParametersController::class
+            )
+        ;
+
+        $contentNode->addChild($node);
+
+        $node = $factory
+            ->createItem('my-webex-ai-tools', ['route' => BackendWebExAIToolsController::class])
+            ->setLabel('WebEx AI Tools')
+            ->setLinkAttribute('title', 'Outils')
+            ->setLinkAttribute('class', 'my-webex-ai')
+            ->setCurrent(
+                $this->requestStack->getCurrentRequest()->get('_controller') === BackendWebExAIToolsController::class
             )
         ;
 

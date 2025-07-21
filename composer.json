@@ -15,11 +15,12 @@
     ],
     "require": {
         "php": "^8.2",
-        "contao/core-bundle": "5.*"
+        "contao/core-bundle": "5.*",
+        "webexmachina/contao-utils": "^2.2"
     },
     "autoload":{
         "psr-4": {
-            "WebExMachina\\WebExAIBundle\\": "src/"
+            "WEM\\WebExAIBundle\\": "src/"
         }
     },
     "scripts": {

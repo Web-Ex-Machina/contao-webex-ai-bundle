@@ -5,12 +5,12 @@
     <div class="space-y-8">
       <div class="px-4 sm:flex sm:items-center">
         <div class="sm:flex-auto">
-          <h2 class="text-base font-semibold text-neutral-900 dark:text-white dark:text-white">{{ "AiTools.title" | trans }}</h2>
+          <h2 class="text-base font-semibold text-neutral-900 dark:text-white dark:text-white">{{ "AiTools.parameters.title" | trans }}</h2>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
         </div>
       </div>
-    Main Content: {{ foo }}
+      {{ dump(rootPages) }}
     </div>
   </div>
 {% endblock %}

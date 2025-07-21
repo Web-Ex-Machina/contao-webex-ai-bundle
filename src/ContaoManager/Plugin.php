@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license    https://www.apache.org/licenses/LICENSE-2.0 Apache 2.0
  */
 
-namespace WebExMachina\WebExAIBundle\ContaoManager;
+namespace WEM\WebExAIBundle\ContaoManager;
 
 use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
@@ -19,7 +19,7 @@ use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use Contao\ManagerPlugin\Routing\RoutingPluginInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
-use WebExMachina\WebExAIBundle\WebExAIBundle;
+use WEM\WebExAIBundle\WebExAIBundle;
 
 class Plugin implements BundlePluginInterface, RoutingPluginInterface
 {

@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license    https://www.apache.org/licenses/LICENSE-2.0 Apache 2.0
  */
 
-namespace WebExMachina\WebExAIBundle;
+namespace WEM\WebExAIBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
