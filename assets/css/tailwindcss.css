@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-color-scheme=dark], [data-color-scheme=dark] *));
+
+.alert-bundle{
+    @apply hidden! opacity-0! w-0! h-0! z-[-100] relative;
+}

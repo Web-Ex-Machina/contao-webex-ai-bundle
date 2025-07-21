@@ -17,3 +17,4 @@ phpstan.neon
 package-lock.json
 composer.lock
 /.idea/
+yarn.lock
