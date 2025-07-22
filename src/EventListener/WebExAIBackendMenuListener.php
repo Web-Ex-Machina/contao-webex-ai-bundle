@@ -36,30 +36,46 @@ final readonly class WebExAIBackendMenuListener
             return;
         }
 
-        $contentNode = $tree->getChild('content');
+        $GLOBALS['TL_CSS'][] = '/bundles/webexai/css/menu-style.css';
+
+        $name = "webex-ai";
+
+        $categoryNode = $factory
+            ->createItem($name)
+            ->setLabel('WebEx AI')
+            ->setUri('/contao?mtg='.$name)
+            ->setLinkAttribute('class', 'group-'.$name)
+            ->setLinkAttribute('title', 'Collapse node')
+            ->setLinkAttribute('data-action', 'contao--toggle-navigation#toggle:prevent')
+            ->setLinkAttribute('data-contao--toggle-navigation-category-param', $name)
+            ->setLinkAttribute('aria-controls', $name)
+            ->setLinkAttribute('data-turbo-prefetch', 'false')
+            ->setChildrenAttribute('id', $name)
+        ;
+        $tree->addChild($categoryNode);
 
         $node = $factory
-            ->createItem('my-webex-ai-parameters', ['route' => BackendWebExAIParametersController::class])
-            ->setLabel('WebEx AI Tools')
+            ->createItem($name . 'parameters', ['route' => BackendWebExAIParametersController::class])
+            ->setLabel('Paramètres')
             ->setLinkAttribute('title', 'Paramètres')
-            ->setLinkAttribute('class', 'my-webex-ai')
+            ->setLinkAttribute('class', $name . 'parameters')
             ->setCurrent(
                 $this->requestStack->getCurrentRequest()->get('_controller') === BackendWebExAIParametersController::class
             )
         ;
 
-        $contentNode->addChild($node);
+        $categoryNode->addChild($node);
 
         $node = $factory
-            ->createItem('my-webex-ai-tools', ['route' => BackendWebExAIToolsController::class])
-            ->setLabel('WebEx AI Tools')
+            ->createItem($name . 'tools', ['route' => BackendWebExAIToolsController::class])
+            ->setLabel('Outils')
             ->setLinkAttribute('title', 'Outils')
-            ->setLinkAttribute('class', 'my-webex-ai')
+            ->setLinkAttribute('class', $name . 'tools')
             ->setCurrent(
                 $this->requestStack->getCurrentRequest()->get('_controller') === BackendWebExAIToolsController::class
             )
         ;
 
-        $contentNode->addChild($node);
+        $categoryNode->addChild($node);
     }
 }

@@ -30,7 +30,7 @@
         "fix-cs": "vendor/bin/ecs check --fix --ansi"
     },
     "extra":{
-        "contao-manager-plugin": "WebExMachina\\WebExAIBundle\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "WEM\\WebExAIBundle\\ContaoManager\\Plugin"
     },
     "config": {
         "allow-plugins": {

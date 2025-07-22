@@ -13,14 +13,16 @@ declare(strict_types=1);
 namespace WEM\WebExAIBundle\Controller;
 
 use Contao\CoreBundle\Controller\AbstractBackendController;
+use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
 use Contao\PageModel;
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('%contao.backend.route_prefix%/webex-ai', name: self::class, defaults: ['_scope' => 'backend'])]
+#[Route('%contao.backend.route_prefix%/webex-ai/parameters', name: 'wem-ai-tools-parameters', defaults: ['_scope' => 'backend'])]
 #[IsGranted('ROLE_ADMIN', message: 'Access restricted to administrators.')]
 class BackendWebExAIParametersController extends AbstractBackendController
 {
@@ -30,13 +32,26 @@ class BackendWebExAIParametersController extends AbstractBackendController
     }
     public function __invoke(Request $request): Response
     {
+        $contaoCsrfTokenName = $this->getCsrfFormOptions()['csrf_field_name'];
+
+        /* @var $contaoCsrfTokenManager ContaoCsrfTokenManager */
+        $contaoCsrfTokenManager = $this->getCsrfFormOptions()['csrf_token_manager'];
+        $contaoCsrfTokenValue = $contaoCsrfTokenManager->getDefaultTokenValue();
+
+          if ($request->getMethod() === 'POST') {
+              dd('lol');
+          }
         $rootPages = PageModel::findPublishedRootPages();
 
-        $GLOBALS['TL_CSS'][] = '/bundles/matomo/css/style.css';
+
+
+        $GLOBALS['TL_CSS'][] = '/bundles/webexai/css/style.css';
 
         return $this->render('@Contao/webex_ai_bundle/parameters.html.twig', [
-            'version' => 'WebEx AI Tools 0.0.1',
+            'version' => 'WebEx AI Tools 0.0.2',
             'rootPages' => $rootPages,
+            'tokenName' => $contaoCsrfTokenName,
+            'tokenValue' => $contaoCsrfTokenValue,
             'title' => $this->translator->trans('parameters_title', [], 'WebExAiBundle'),
             'headline' => $this->translator->trans('parameters_headline', [], 'WebExAiBundle') ,
         ]);

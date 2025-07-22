@@ -3,6 +3,6 @@ services:
     autowire: true
     autoconfigure: true
 
-  WebExMachina\WebExAIBundle\:
+  WEM\WebExAIBundle\:
     resource: ../src
     exclude: ../src/{ContaoManager,DependencyInjection}

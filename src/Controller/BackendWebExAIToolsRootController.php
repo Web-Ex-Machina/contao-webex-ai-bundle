@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('%contao.backend.route_prefix%/webex-ai', name: self::class, defaults: ['_scope' => 'backend'])]
+#[Route('%contao.backend.route_prefix%/webex-ai/root', name: self::class, defaults: ['_scope' => 'backend'])]
 #[IsGranted('ROLE_ADMIN', message: 'Access restricted to administrators.')]
 class BackendWebExAIToolsRootController extends AbstractBackendController
 {
@@ -32,7 +32,7 @@ class BackendWebExAIToolsRootController extends AbstractBackendController
     {
         $rootPagesAll = PageModel::findPublishedRootPages();
 
-        $GLOBALS['TL_CSS'][] = '/bundles/matomo/css/style.css';
+        $GLOBALS['TL_CSS'][] = '/bundles/webexai/css/style.css';
         $rootPages = [];
         foreach ($rootPagesAll as $rootPage) {
             $is_configured = ($rootPage['ia_api_user'] !== null && $rootPage['ia_api_pwd'] !== '');
