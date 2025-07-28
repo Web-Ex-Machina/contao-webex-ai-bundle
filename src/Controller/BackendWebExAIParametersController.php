@@ -14,11 +14,14 @@ namespace WEM\WebExAIBundle\Controller;
 
 use Contao\CoreBundle\Controller\AbstractBackendController;
 use Contao\CoreBundle\Csrf\ContaoCsrfTokenManager;
+use Contao\CoreBundle\Exception\NotFoundException;
+use Contao\Input;
 use Contao\PageModel;
 use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -36,10 +39,22 @@ class BackendWebExAIParametersController extends AbstractBackendController
 
         /* @var $contaoCsrfTokenManager ContaoCsrfTokenManager */
         $contaoCsrfTokenManager = $this->getCsrfFormOptions()['csrf_token_manager'];
+
         $contaoCsrfTokenValue = $contaoCsrfTokenManager->getDefaultTokenValue();
 
-          if ($request->getMethod() === 'POST') {
-              dd('lol');
+        // TODO : faire fonctionner ce putain de token de ses mort, il me retroune toujours false avec
+        // dd( $this->isCsrfTokenValid($contaoCsrfTokenName, $request->get('REQUEST_TOKEN')));
+
+          if ($request->getMethod() === 'POST' ) {
+              $objPage = PageModel::findById($request->get('root_page_id'));
+              if(!$objPage) {
+                  throw new NotFoundException(sprintf('PaGe %s Do NoT eXiStS !', $request->get('root_page_id')));
+              }
+              $objPage->ia_api_user = ($request->get('api_user')) ? $request->get('api_user') : null;
+              $objPage->ia_api_pwd = ($request->get('api_pwd')) ? $request->get('api_pwd') : null;;
+              $objPage->tstamp = time();
+              $objPage->save();
+
           }
         $rootPages = PageModel::findPublishedRootPages();
 

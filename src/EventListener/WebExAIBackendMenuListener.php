@@ -16,7 +16,7 @@ use Contao\CoreBundle\Event\ContaoCoreEvents;
 use Contao\CoreBundle\Event\MenuEvent;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RequestStack;
-use WEM\WebExAIBundle\Controller\BackendWebExAIToolsController;
+use WEM\WebExAIBundle\Controller\BackendWebExAIToolsIndexController;
 use WEM\WebExAIBundle\Controller\BackendWebExAIParametersController;
 
 #[AsEventListener(ContaoCoreEvents::BACKEND_MENU_BUILD, priority: -255)]
@@ -67,12 +67,12 @@ final readonly class WebExAIBackendMenuListener
         $categoryNode->addChild($node);
 
         $node = $factory
-            ->createItem($name . 'tools', ['route' => BackendWebExAIToolsController::class])
+            ->createItem($name . 'tools', ['route' => BackendWebExAIToolsIndexController::class])
             ->setLabel('Outils')
             ->setLinkAttribute('title', 'Outils')
             ->setLinkAttribute('class', $name . 'tools')
             ->setCurrent(
-                $this->requestStack->getCurrentRequest()->get('_controller') === BackendWebExAIToolsController::class
+                $this->requestStack->getCurrentRequest()->get('_controller') === BackendWebExAIToolsIndexController::class
             )
         ;
 

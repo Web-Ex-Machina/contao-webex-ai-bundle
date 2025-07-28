@@ -20,9 +20,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('%contao.backend.route_prefix%/webex-ai/root', name: self::class, defaults: ['_scope' => 'backend'])]
+#[Route('%contao.backend.route_prefix%/webex-ai/tools', name: 'wem-ai-tools-index', defaults: ['_scope' => 'backend'])]
 #[IsGranted('ROLE_ADMIN', message: 'Access restricted to administrators.')]
-class BackendWebExAIToolsRootController extends AbstractBackendController
+class BackendWebExAIToolsIndexController extends AbstractBackendController
 {
     public function __construct(
         private readonly TranslatorInterface $translator
@@ -30,22 +30,19 @@ class BackendWebExAIToolsRootController extends AbstractBackendController
     }
     public function __invoke(Request $request): Response
     {
-        $rootPagesAll = PageModel::findPublishedRootPages();
+        $objPage = PageModel::findBy(
+            ['type = ?','published = ?'],
+            ["root",'1'],
+            ['table' => 'tl_page']
+        );
 
         $GLOBALS['TL_CSS'][] = '/bundles/webexai/css/style.css';
-        $rootPages = [];
-        foreach ($rootPagesAll as $rootPage) {
-            $is_configured = ($rootPage['ia_api_user'] !== null && $rootPage['ia_api_pwd'] !== '');
-            if ($is_configured) {
-                $rootPages[] = $rootPage;
-            }
-        }
 
-        return $this->render('@Contao/webex_ai_bundle/seo_tools_roots.html.twig', [
+        return $this->render('@Contao/webex_ai_bundle/seo_tools_index.html.twig', [
             'version' => 'WebEx AI Tools 0.0.1',
-            'rootPages' => $rootPages,
-            'title' => $this->translator->trans('tools_roots_title', [], 'WebExAiBundle'),
-            'headline' => $this->translator->trans('tools_roots_headline', [], 'WebExAiBundle') ,
+            'validedHomesPage' => $objPage,
+            'title' => $this->translator->trans('tools_pages_title', [], 'WebExAiBundle'),
+            'headline' => $this->translator->trans('tools_pages_headline', [], 'WebExAiBundle'),
         ]);
     }
 }

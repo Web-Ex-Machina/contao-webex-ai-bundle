@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace WEM\WebExAIBundle\Controller;
 
 use Contao\CoreBundle\Controller\AbstractBackendController;
+use Contao\CoreBundle\Exception\NotFoundException;
 use Contao\PageModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,28 +21,36 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-#[Route('%contao.backend.route_prefix%/webex-ai/tools', name: self::class, defaults: ['_scope' => 'backend'])]
+#[Route('%contao.backend.route_prefix%/webex-ai/{id}/pages', name: 'wem-ai-tools-pages', defaults: ['_scope' => 'backend'])]
 #[IsGranted('ROLE_ADMIN', message: 'Access restricted to administrators.')]
-class BackendWebExAIToolsController extends AbstractBackendController
+class BackendWebExAIToolsPagesController extends AbstractBackendController
 {
     public function __construct(
         private readonly TranslatorInterface $translator
     ) {
     }
-    public function __invoke(Request $request): Response
+    public function __invoke(Request $request, int $id): Response
     {
-        $objContent = PageModel::findById($request->get('id'));
-        $childPages = PageModel::findByPid($objContent->id);
+
+        $rootPage = PageModel::findBy(
+            ['type = ?','id = ?'],
+            ["root", $id],
+            ['table' => 'tl_page']
+        );
+
+        if (!$rootPage){
+            throw new NotFoundException(sprintf('Not a valide root page ', $request->get('root_page_id')));
+        }
 
         $GLOBALS['TL_CSS'][] = '/bundles/webexai/css/style.css';
 
+        $pages = PageModel::findByPid($rootPage->id);
+
         return $this->render('@Contao/webex_ai_bundle/seo_tools_pages.html.twig', [
             'version' => 'WebEx AI Tools 0.0.1',
-            'homePage' => $objContent,
-            'pages' => $childPages,
-            'data' => '',
-            'title' => $this->translator->trans('tools_pages_title', [], 'WebExAiBundle') . ' ' . $objContent->title,
-            'headline' => $this->translator->trans('tools_pages_headline', [], 'WebExAiBundle') . ' ' . $objContent->title,
+            'pages' => $pages,
+            'title' => $this->translator->trans('tools_roots_title', [], 'WebExAiBundle'),
+            'headline' => $this->translator->trans('tools_roots_headline', [], 'WebExAiBundle') ,
         ]);
     }
 }

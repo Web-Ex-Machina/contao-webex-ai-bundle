@@ -14,7 +14,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ia_api_user'] = [
         'rgxp' => 'url',
         'tl_class' => 'w50'
     ],
-    'sql' => "varchar(255) NOT NULL default ''",
+    'sql' => "varchar(255) NULL default ''",
 ];
 
 
@@ -27,7 +27,7 @@ $GLOBALS['TL_DCA']['tl_page']['fields']['ia_api_pwd'] = [
     'eval' => [
         'tl_class' => 'w50'
     ],
-    'sql' => "varchar(255) NOT NULL default ''",
+    'sql' => "varchar(255) NULL default ''",
 ];
 
 PaletteManipulator::create()

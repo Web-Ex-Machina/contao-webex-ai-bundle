@@ -1,0 +1,13 @@
+AiTools:
+  page:
+    table:
+      title: "Titre"
+      description: "Description"
+      type: "Type de page"
+      actions: "Actions"
+    view: "Voir"
+    edit: "Modifier"
+    ai:
+      save: "Valider"
+      get_title: "Générer le titre"
+      get_description: "Générer la description"

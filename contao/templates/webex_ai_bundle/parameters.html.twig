@@ -10,7 +10,6 @@
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
         </div>
       </div>
-      {{ dump(rootPages) }}
       <dl class="grid gap-5 ">
         {% for item in rootPages %}
         <div class="overflow-hidden rounded-lg bg-white dark:bg-[#1b1d21] px-4 py-5 shadow-sm sm:p-6">
@@ -26,6 +25,7 @@
                 <input id="api_pwd" name="api_pwd"  class="inline-block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-600 sm:text-sm/6" type="password" value="{{ item.ia_api_pwd }}"></label>
                 </div>
                 <div>
+                  <input type="hidden" name="root_page_id" value="{{ rootPages.id }}">
                   <input type="hidden" name="{{ tokenName }}" value="{{ tokenValue }}">
                   <input class="rounded-md bg-sky-500 px-4 py-1.5 text-sm font-semibold !text-white shadow-xs hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500" type="submit" value="Send"></div>
               </form>
