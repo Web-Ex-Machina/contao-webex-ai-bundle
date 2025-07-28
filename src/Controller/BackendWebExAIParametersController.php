@@ -50,8 +50,8 @@ class BackendWebExAIParametersController extends AbstractBackendController
               if(!$objPage) {
                   throw new NotFoundException(sprintf('PaGe %s Do NoT eXiStS !', $request->get('root_page_id')));
               }
-              $objPage->ia_api_user = ($request->get('api_user')) ? $request->get('api_user') : null;
-              $objPage->ia_api_pwd = ($request->get('api_pwd')) ? $request->get('api_pwd') : null;;
+              $objPage->ia_api_user = ($request->get('api_user')) ? $request->get('api_user') : '';
+              $objPage->ia_api_pwd = ($request->get('api_pwd')) ? $request->get('api_pwd') : '';
               $objPage->tstamp = time();
               $objPage->save();
 
