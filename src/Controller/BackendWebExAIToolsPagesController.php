@@ -41,7 +41,8 @@ class BackendWebExAIToolsPagesController extends AbstractBackendController
         if (!$rootPage){
             throw new NotFoundException(sprintf('Not a valide root page ', $request->get('root_page_id')));
         }
-
+        $GLOBALS['TL_JAVASCRIPT'][] = '/bundles/webexai/js/jquery-3.7.1.min.js';
+        $GLOBALS['TL_JAVASCRIPT'][] = '/bundles/webexai/js/ajax-ai.js';
         $GLOBALS['TL_CSS'][] = '/bundles/webexai/css/style.css';
 
         $pages = PageModel::findByPid($rootPage->id);
