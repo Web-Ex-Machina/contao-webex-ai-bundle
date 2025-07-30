@@ -5,6 +5,7 @@ jQuery.noConflict();
 jQuery( document ).ready(function( $ ) {
 
     const baseUrl = "/contao/webex-ai/seo/";
+    const baseUrlSave = "/contao/webex-ai/save/";
 
     // Wait for DOM to be ready
     $(document).ready(function() {
@@ -140,12 +141,12 @@ jQuery( document ).ready(function( $ ) {
 
     function saveDescription(postId, button) {
         $.ajax({
-            url: baseUrl,
+            url: baseUrlSave,
             type: 'POST',
             data: {
-                action: 'save_description',
+                champ: 'description',
                 post_id: postId,
-                content: document.getElementById("description-" + postId).value,
+                value: document.getElementById("description-" + postId).value,
             },
             success: function(response) {
                 if (response.success) {
@@ -165,12 +166,12 @@ jQuery( document ).ready(function( $ ) {
 
     function saveTitle(postId, button) {
         $.ajax({
-            url: baseUrl,
+            url: baseUrlSave,
             type: 'POST',
             data: {
-                action: 'save_title',
+                champ: 'title',
                 post_id: postId,
-                content: document.getElementById("title-" + postId).value,
+                value: document.getElementById("title-" + postId).value,
             },
             success: function(response) {
                 if (response.success) {

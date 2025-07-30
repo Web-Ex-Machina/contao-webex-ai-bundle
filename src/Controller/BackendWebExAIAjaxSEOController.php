@@ -27,7 +27,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use WEM\WebExAIBundle\Service\ApiAiWrapper;
 
-#[Route('%contao.backend.route_prefix%/webex-ai/seo/', name: 'wem-ai-ajax-SEO', defaults: ['_scope' => 'backend'])]
+#[Route('%contao.backend.route_prefix%/webex-ai/seo/query', name: 'wem-ai-ajax-SEO', defaults: ['_scope' => 'backend'])]
 #[IsGranted('ROLE_ADMIN', message: 'Access restricted to administrators.')]
 class BackendWebExAIAjaxSEOController extends AbstractBackendController
 {
@@ -42,7 +42,6 @@ class BackendWebExAIAjaxSEOController extends AbstractBackendController
 
             $id = $request->get('post_id');
             $champ = $request->get('champ');
-
 
             if (!$page = PageModel::findByid($id)) {
                 return $this->json([
@@ -70,7 +69,6 @@ class BackendWebExAIAjaxSEOController extends AbstractBackendController
 
             $user = ($page->ia_api_user) ? $page->ia_api_user : ( $GLOBALS['TL_CONFIG']['ia_api_global_user'] ?? false) ;
             $password = ($page->ia_api_pwd) ? $page->ia_api_pwd : ( $GLOBALS['TL_CONFIG']['ia_api_global_pwd'] ?? false) ;
-            dump($user,$password);
 
             if (!$user or !$password) {
                 return $this->json([
@@ -125,9 +123,6 @@ class BackendWebExAIAjaxSEOController extends AbstractBackendController
                 ),
                 default => throw new UnsupportedOperationException('Not valid'),
             };
-
-            $page->tstamp = time();
-            $page->save();
 
             return $this->json([
                 "success" => true,
