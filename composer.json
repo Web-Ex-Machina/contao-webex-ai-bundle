@@ -16,7 +16,8 @@
     "require": {
         "php": "^8.2",
         "contao/core-bundle": "5.*",
-        "webexmachina/contao-utils": "^2.2"
+        "webexmachina/contao-utils": "^2.2",
+        "symfony/cache": "6.4.x | 7.2.x"
     },
     "autoload":{
         "psr-4": {

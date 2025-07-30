@@ -1,6 +1,7 @@
 services:
   _defaults:
     autowire: true
+    public: true
     autoconfigure: true
 
   WEM\WebExAIBundle\:
