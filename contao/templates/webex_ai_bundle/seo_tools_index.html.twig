@@ -5,19 +5,17 @@
     <div class="space-y-8">
       <div class="px-4 sm:flex sm:items-center">
         <div class="sm:flex-auto">
-          <h2 class="text-base font-semibold text-neutral-900 dark:text-white dark:text-white">{{ "AiTools.index.title" | trans }}</h2>
+          <h2 class="text-base font-semibold text-neutral-900 dark:text-white dark:text-white">{{ "tools_index.top_text" | trans }}</h2>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
         </div>
       </div>
-
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
-
         {% for item in validedHomesPage %}
           <div class="font-medium text-center bg-white dark:bg-[#121416] rounded-lg shadow p-6">
             <h3 class="!text-xl text-[#f47c00]">{{ item.id }} - {{ item.title }} - {{ item.language }}</h3>
             <p>{{ item.url }}</p>
-            <a href="{{ path('wem-ai-tools-pages', {'id': item.id}) }}" class="!underline !text-decoration !decoration-[#f47c00]">Edit Website SEO</a>
+            <a href="{{ path('wem-ai-tools-pages', {'id': item.id}) }}" class="!underline !text-decoration !decoration-[#f47c00]">{{ "tools_index.edit_seo" | trans }}</a>
           </div>
         {% endfor %}
       </div>

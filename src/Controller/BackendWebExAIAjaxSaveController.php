@@ -56,7 +56,7 @@ class BackendWebExAIAjaxSaveController extends AbstractBackendController
 
             switch ($champ) {
                 case 'title':
-                    $page->pageTitle = $value;
+                    $page->title = $value;
                     break;
                 case 'description':
                     $page->description = $value;
@@ -72,7 +72,7 @@ class BackendWebExAIAjaxSaveController extends AbstractBackendController
                 "success" => true,
                 "data" =>
                     [
-                        'message' => $champ . 'optimized successfully',
+                        'message' => $champ . ' successfully save.',
                         $champ => $request->get('champ')
                     ]
             ]);

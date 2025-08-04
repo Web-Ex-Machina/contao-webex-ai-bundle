@@ -55,6 +55,7 @@ class BackendWebExAIAjaxSEOController extends AbstractBackendController
             }
 
             $page->loadDetails();
+            $root = PageModel::findByid($page->rootId);
 
             $objArticle = ArticleModel::findPublishedByPidAndColumn($id, 'main')->first();
             $objContent = ContentModel::findPublishedByPidAndTable($objArticle->id, ArticleModel::getTable())->first();
@@ -67,8 +68,8 @@ class BackendWebExAIAjaxSEOController extends AbstractBackendController
                 }
             }
 
-            $user = ($page->ia_api_user) ? $page->ia_api_user : ( $GLOBALS['TL_CONFIG']['ia_api_global_user'] ?? false) ;
-            $password = ($page->ia_api_pwd) ? $page->ia_api_pwd : ( $GLOBALS['TL_CONFIG']['ia_api_global_pwd'] ?? false) ;
+            $user = ($root->ia_api_user) ? $root->ia_api_user : ( $GLOBALS['TL_CONFIG']['ia_api_global_user'] ?? false) ;
+            $password = ($root->ia_api_pwd) ? $root->ia_api_pwd : ( $GLOBALS['TL_CONFIG']['ia_api_global_pwd'] ?? false) ;
 
             if (!$user or !$password) {
                 return $this->json([
@@ -112,14 +113,14 @@ class BackendWebExAIAjaxSEOController extends AbstractBackendController
                     theme: $title,
                     language: $language,
                     text: $excerpt,
-                    token: $token
+                    token: $token['token']
                 ),
                 'description' => $this->apiAiWrapper->generateSeoDescription(
                     keywords: '',
                     theme: $title,
                     language: $language,
                     text: $excerpt,
-                    token: $token
+                    token: $token['token']
                 ),
                 default => throw new UnsupportedOperationException('Not valid'),
             };
@@ -128,8 +129,8 @@ class BackendWebExAIAjaxSEOController extends AbstractBackendController
                 "success" => true,
                 "data" =>
                     [
-                        'message' => $champ . 'optimized successfully',
-                        $champ => $value
+                        'message' => $champ . ' successfully optimized.',
+                        $champ =>  trim($value," \n\r\t\v\0\"")
                     ]
             ]);
         } else {

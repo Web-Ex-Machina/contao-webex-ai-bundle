@@ -4,8 +4,8 @@
 jQuery.noConflict();
 jQuery( document ).ready(function( $ ) {
 
-    const baseUrl = "/contao/webex-ai/seo/";
-    const baseUrlSave = "/contao/webex-ai/save/";
+    const baseUrl = "/contao/webex-ai/seo/query";
+    const baseUrlSave = "/contao/webex-ai/seo/save";
 
     // Wait for DOM to be ready
     $(document).ready(function() {
@@ -197,13 +197,31 @@ jQuery( document ).ready(function( $ ) {
      * @param {string} message - The message to display
      */
     function showNotification(type, message) {
-        const notificationClass = type === 'success' ? 'notice-success' : 'notice-error';
-
-        // Create notification element
-        const notification = $('<div class="notice ' + notificationClass + ' is-dismissible"><p>' + message + '</p></div>');
-
+        const baseClasses = 'flex items-center p-4 mb-4 rounded-lg shadow-md border-l-4 max-w-md';
+        const typeClasses = type === 'success' 
+            ? 'bg-green-50 border-green-500 text-green-800' 
+            : 'bg-red-50 border-red-500 text-red-800';
+        
+        // Create icon based on type
+        const icon = type === 'success'
+            ? '<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>'
+            : '<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>';
+        
+        // Create notification element with Tailwind classes
+        const notification = $('<div class="' + baseClasses + ' ' + typeClasses + '">' + 
+            icon + 
+            '<div class="ml-3 text-sm font-medium">' + message + '</div>' +
+            '</div>');
+        
         // Add notification to the top of the page
         $('#notification').prepend(notification);
+        
+        // Add click event to close button
+        notification.find('button').on('click', function() {
+            notification.fadeOut(300, function() {
+                $(this).remove();
+            });
+        });
 
         // Auto-dismiss after 5 seconds
         setTimeout(function() {

@@ -67,8 +67,8 @@ class BackendWebExAIParametersController extends AbstractBackendController
             'rootPages' => $rootPages,
             'tokenName' => $contaoCsrfTokenName,
             'tokenValue' => $contaoCsrfTokenValue,
-            'title' => $this->translator->trans('parameters_title', [], 'WebExAiBundle'),
-            'headline' => $this->translator->trans('parameters_headline', [], 'WebExAiBundle') ,
+            'title' => $this->translator->trans('parameters.title', [], 'WebExAiBundle'),
+            'headline' => $this->translator->trans('parameters.headline', [], 'WebExAiBundle') ,
         ]);
     }
 }

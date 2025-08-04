@@ -5,7 +5,7 @@
     <div class="space-y-8">
       <div class="px-4 sm:flex sm:items-center">
         <div class="sm:flex-auto">
-          <h2 class="text-base font-semibold text-neutral-900 dark:text-white dark:text-white">{{ "ai_tools.parameters.title" | trans }}</h2>
+          <h2 class="text-base font-semibold text-neutral-900 dark:text-white dark:text-white">{{ "parameters.top_text" | trans }}</h2>
         </div>
         <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
         </div>
@@ -17,17 +17,17 @@
           <dd class="mt-1 text-base font-semibold tracking-tight text-neutral-900 dark:text-neutral-300">
               <form action="{{ path('wem-ai-tools-parameters') }}" method="post" name="form_{{ item.id }}" class="flex items-end gap-4">
                 <div>
-                <label for="api_user">{{ "ai_tools.parameters.row.api_user" | trans }}
+                <label for="api_user">{{ "parameters.row.api_user" | trans }}
                 <input id="api_user" name="api_user"  class="inline-block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-600 sm:text-sm/6" type="text" value="{{ item.ia_api_user }}"></label>
                 </div>
                 <div>
-                <label for="api_pwd">{{ "ai_tools.parameters.row.api_pwd" | trans }}
+                <label for="api_pwd">{{ "parameters.row.api_pwd" | trans }}
                 <input id="api_pwd" name="api_pwd"  class="inline-block w-full rounded-md bg-white px-3 py-1.5 text-base text-slate-900 outline-1 -outline-offset-1 outline-slate-300 placeholder:text-slate-400 focus:outline-2 focus:-outline-offset-2 focus:outline-sky-600 sm:text-sm/6" type="password" value="{{ item.ia_api_pwd }}"></label>
                 </div>
                 <div>
                   <input type="hidden" name="root_page_id" value="{{ rootPages.id }}">
                   <input type="hidden" name="{{ tokenName }}" value="{{ tokenValue }}">
-                  <input class="rounded-md bg-sky-500 px-4 py-1.5 text-sm font-semibold !text-white shadow-xs hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500" type="submit" value="Save"></div>
+                  <input class="rounded-md bg-sky-500 px-4 py-1.5 text-sm font-semibold !text-white shadow-xs hover:bg-sky-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500" type="submit" value="{{ "parameters.save" | trans }}"></div>
               </form>
           </dd>
         </div>

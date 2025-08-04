@@ -50,8 +50,8 @@ class BackendWebExAIToolsPagesController extends AbstractBackendController
         return $this->render('@Contao/webex_ai_bundle/seo_tools_pages.html.twig', [
             'version' => 'WebEx AI Tools 0.0.1',
             'pages' => $pages,
-            'title' => $this->translator->trans('tools_roots_title', [], 'WebExAiBundle'),
-            'headline' => $this->translator->trans('tools_roots_headline', [], 'WebExAiBundle') ,
+            'title' => $this->translator->trans('tools_pages.title', [], 'WebExAiBundle'),
+            'headline' => $this->translator->trans('tools_pages.headline', [], 'WebExAiBundle') ,
         ]);
     }
 }

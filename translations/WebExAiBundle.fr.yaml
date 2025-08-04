@@ -1,13 +1,30 @@
-AiTools:
-  page:
-    table:
-      title: "Titre"
-      description: "Description"
-      type: "Type de page"
-      actions: "Actions"
-    view: "Voir"
-    edit: "Modifier"
-    ai:
-      save: "Valider"
-      get_title: "Générer le titre"
-      get_description: "Générer la description"
+tools_pages:
+  title: "WebEx SEO Edit the SEO for this website"
+  headline: "Edit the SEO for this website"
+  top_text: "Vous pouvez utiliser l‘IA pour récupérer une version optimisé du SEO et ensuite la modifier, ou directement modifier le SEO manuellement."
+  table:
+    title: "Titre"
+    description: "Description"
+    type: "Type de page"
+    actions: "Actions"
+  view: "Voir"
+  edit: "Modifier"
+  ai:
+    save: "Sauvegarder"
+    get_title: "Générer le titre"
+    get_description: "Générer la description"
+
+tools_index:
+  title: "WebEx SEO liste des sites internets"
+  headline: "Liste des sites internets"
+  top_text: "Tous les sites internets disponibles"
+  edit_seo: "Modifier le SEO"
+
+parameters:
+  title: "WebEx SEO Paramètres"
+  headline: "Paramètres"
+  save: "Enregistrer"
+  top_text: "Renseignez ici les comptes indépendants pour chaque site. Si les champs ne sont pas renseignés, alors cela utilisera les informations entrées dans la page des paramètres globaux du site."
+  row:
+    api_user: "Compte"
+    api_pwd: "Mot de passe"

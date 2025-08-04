@@ -1,13 +1,33 @@
-AiTools:
-  page:
-    table:
-      title: "Title"
-      description: "Description"
-      type: "Page type"
-      actions: "Actions"
-    view: "See"
-    edit: "Edit"
-    ai:
-      save: "Save"
-      get_title: "Generate title"
-      get_description: "Generate description"
+tools_pages:
+  title: "WebEx SEO Edit the SEO for this website"
+  headline: "Edit the SEO for this website"
+  top_text: "you can use the AI for generate a new SEO and edit the result or directly edit and save the new informations"
+  table:
+    title: "Title"
+    description: "Description"
+    type: "Page type"
+    actions: "Actions"
+  view: "See"
+  edit: "Edit"
+  ai:
+    save: "Save"
+    get_title: "Generate title"
+    get_description: "Generate description"
+
+tools_roots_headline: "_tools_roots_headline"
+tools_roots_title: "_tools_roots_title"
+parameters_headline: "_parameters_headline"
+tools_index:
+  title: "WebEx SEO Website List"
+  headline: "Website List"
+  top_text: "All enabled WebSites"
+  edit_seo: "Edit the SEO"
+
+parameters:
+  title: "WebEx SEO Parameters"
+  headline: "Parameters"
+  save: "Save"
+  top_text: "Enter the independent accounts for each site here. If the fields are not filled in, then it will use the information entered on the site's global settings page."
+  row:
+    api_user: "User"
+    api_pwd: "Password"
