@@ -19,7 +19,7 @@ More details on our [website][1]:
 
 ## Installation
 * Use the Contao Manager
-* Use the `composer require webexmachina/contao-webex-ai-bundle`
+* Use the `composer require webexmachina/webex-ai`
 
 ## Documentation
 * [API documentation][2]
