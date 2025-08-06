@@ -1,7 +1,5 @@
 {
     "name": "webexmachina/webex-ai",
-    "version": "0.0.1-dev",
-    "minimum-stability" : "dev",
     "description": "Contao 5 WebEx AI Bundle.",
     "type": "contao-bundle",
     "license": "Apache-2.0",
